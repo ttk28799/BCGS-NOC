@@ -1,0 +1,198 @@
+[
+  {
+    "ID": "b2f19f9f-d10a-4cf8-bc94-dfae2628bf01",
+    "Location": {
+      "Region": "DCQG",
+      "Rack": "01"
+    },
+    "Name": "Dell MX7000",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Firmware Mismatch"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "193e00ca-c1d5-4d15-a4e0-728bdb41b3be",
+    "Location": {
+      "Region": "DCQG",
+      "Rack": "01"
+    },
+    "Name": "Dell MX7000 - Sled 2",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i RAM"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "505f83e1-909e-4605-b752-41b1a0567f54",
+    "Location": {
+      "Region": "DCQG",
+      "Rack": "03"
+    },
+    "Name": "Oracle ZFS ZS7-2 (U1-U2)",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i RAM"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "8c6c525d-611a-4df7-b405-e07ee2344b26",
+    "Location": {
+      "Region": "DCQG",
+      "Rack": "03"
+    },
+    "Name": "Oracle ZFS ZS7-2 (U3-U4)",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i RAM"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "1c48fee3-1e47-4e46-8a27-02dbb05ce081",
+    "Location": {
+      "Region": "DCQG",
+      "Rack": "04"
+    },
+    "Name": "Oracle X8-8",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Card"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "86963534-edca-4479-bda5-c43ecdba23a4",
+    "Location": {
+      "Region": "NVNN",
+      "Rack": "01"
+    },
+    "Name": "Hitachi Storage G700",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Disk"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "8a7bbb03-eb46-4303-b290-6abe8a4e1e3e",
+    "Location": {
+      "Region": "NVNN",
+      "Rack": "04"
+    },
+    "Name": "Dell NX3240",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Disk"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "c5a905cc-f82b-4910-a752-e3a30b08c768",
+    "Location": {
+      "Region": "NVNN",
+      "Rack": "08"
+    },
+    "Name": "Dell PowerEdge R740xd2",
+    "Issue": {
+      "IssueList": [
+        "B\u00E1o warning"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "3115354d-6159-47e8-b12c-541fc76ed282",
+    "Location": {
+      "Region": "CCCD",
+      "Rack": "01"
+    },
+    "Name": "Fujitsu CX400",
+    "Issue": {
+      "IssueList": [
+        "C\u1EA3nh b\u00E1o CSS"
+      ]
+    },
+    "Note": "\u002B Chassis 1: Node 1;\n\u002B Chassis 3: Node 1, 2;\n\u002B Chassis 4: Node 1, 3;"
+  },
+  {
+    "ID": "4f6a9c23-06d1-4399-b1f0-555d3031a5fc",
+    "Location": {
+      "Region": "CCCD",
+      "Rack": "02"
+    },
+    "Name": "Dell Unity XT (U1-U5)",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Disk"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "afd414f5-2b46-4673-8a6e-95cab2cd73e7",
+    "Location": {
+      "Region": "CCCD",
+      "Rack": "02"
+    },
+    "Name": "Dell Unity XT (U7-U10)",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i RAM"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "b53786da-b1ae-421b-9c9c-7c02f6a46350",
+    "Location": {
+      "Region": "CCCD",
+      "Rack": "02"
+    },
+    "Name": "Fujitsu CX400",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Battery Voltage BATT 3.0V low warning 2.4 Volt"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "73d16258-bfd5-443b-a00a-81e544c0c5dc",
+    "Location": {
+      "Region": "DDDT",
+      "Rack": "01"
+    },
+    "Name": "Dell MX7000",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Firmware Mismatch"
+      ]
+    },
+    "Note": ""
+  },
+  {
+    "ID": "0d042af8-7c65-4d91-ab84-dd6d1b51f660",
+    "Location": {
+      "Region": "DDDT",
+      "Rack": "02"
+    },
+    "Name": "Dell PowerStore 1000T",
+    "Issue": {
+      "IssueList": [
+        "L\u1ED7i Card"
+      ]
+    },
+    "Note": ""
+  }
+]

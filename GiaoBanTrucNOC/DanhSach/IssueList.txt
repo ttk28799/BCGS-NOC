@@ -1,0 +1,8 @@
+Báo warning
+Lỗi RAM
+Lỗi Disk
+Lỗi Card
+Lỗi Firmware Mismatch
+Lỗi nguồn
+Cảnh báo CSS
+Lỗi Battery Voltage BATT 3.0V low warning 2.4 Volt
