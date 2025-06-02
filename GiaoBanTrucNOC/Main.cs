@@ -317,64 +317,6 @@ namespace GiaoBanTrucNOC
             return accessCount.ToString();
         }
 
-        //private string DeviceIssue()
-        //{
-        //    var RegionDataGridView = new Dictionary<string, DataGridView>
-        //    {
-        //        { "DCQG", dgvIssueDCQG },
-        //        { "NVNN", dgvIssueNVNN },
-        //        { "CCCD", dgvIssueCCCD },
-        //        { "DDDT", dgvIssueDDDT }
-        //    };
-        //    StringBuilder deviceIssue = new StringBuilder();
-        //    foreach (var item in RegionDataGridView)
-        //    {
-        //        string region = item.Key;
-        //        DataGridView dgv = item.Value;
-        //        List<string> loiList = new List<string>();
-        //        var rackFlag = new HashSet<string>();
-        //        foreach (DataGridViewRow row in dgv.Rows)
-        //        {
-        //            if (row.IsNewRow) continue;
-        //            string RACK = row.Cells[0].Value?.ToString();
-        //            string ThietBi = row.Cells[1].Value?.ToString();
-        //            string loi = row.Cells[2].Value?.ToString();
-        //            string ghiChu = row.Cells[3].Value?.ToString();
-        //            // Nếu có nhiều thiết bị cùng RACK thì xuống dòng, dấu "+" đầu dòng cho mỗi thiết bị
-
-        //            if (rackFlag.Contains(RACK))
-        //            {
-        //                if (string.IsNullOrEmpty(ghiChu))
-        //                {
-        //                    loiList.Add($"{ThietBi} - {loi}");
-        //                }
-        //                else
-        //                {
-        //                    loiList.Add($"{ThietBi} - {loi}\n{ghiChu}");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                rackFlag.Add(RACK);
-        //                if (string.IsNullOrEmpty(ghiChu))
-        //                {
-        //                    loiList.Add($"•{RACK}: \n{ThietBi} - {loi}");
-        //                }
-        //                else
-        //                {
-        //                    loiList.Add($"•{RACK}: \n{ThietBi} - {loi}\n{ghiChu}");
-        //                }
-        //            }
-
-        //        }
-        //        if (loiList.Count > 0)
-        //        {
-        //            deviceIssue.AppendLine($"{region}: \n{string.Join("\n", loiList)}");
-        //        }
-        //    }
-        //    return deviceIssue.ToString();
-        //}
-
         private string PDUReport()
         {
             StringBuilder pDUReport = new StringBuilder();
@@ -441,69 +383,144 @@ namespace GiaoBanTrucNOC
                 Console.WriteLine("❌ JSON input rỗng hoặc không hợp lệ.");
                 return;
             }
-            var devices = JsonSerializer.Deserialize<List<Device>>(json, new JsonSerializerOptions
+
+            List<Device> devices;
+            try
             {
-                PropertyNameCaseInsensitive = true
-            });
+                devices = JsonSerializer.Deserialize<List<Device>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❌ Lỗi khi đọc JSON: {ex.Message}");
+                return;
+            }
+
+            if (devices == null || devices.Count == 0)
+            {
+                MessageBox.Show("❌ Không có thiết bị nào trong dữ liệu JSON.");
+                return;
+            }
 
             var grouped = devices
                 .GroupBy(d => new { d.Location.Region, d.Location.Rack })
                 .OrderBy(g => g.Key.Region)
                 .ThenBy(g => g.Key.Rack)
                 .ToList();
+
             if (!doc.Bookmarks.Exists(bookmarkName))
             {
                 MessageBox.Show($"❌ Bookmark '{bookmarkName}' không tồn tại trong file template.");
                 doc.Close(false);
+                return;
             }
+
             Word.Range bookmarkRange = doc.Bookmarks[bookmarkName].Range;
             int rowCount = grouped.Count + 1;
-            int colCount = 5;
+            int colCount = 4; // Không còn STT, chỉ còn 4 cột
 
             Word.Table table = doc.Tables.Add(bookmarkRange, rowCount, colCount);
             table.Borders.Enable = 1;
             table.Range.Font.Name = "Times New Roman";
             table.Range.Font.Size = 12;
             table.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
-            table.AutoFitBehavior(Word.WdAutoFitBehavior.wdAutoFitFixed);
 
-            // Thiết lập độ rộng từng cột theo đơn vị Points (1 inch ≈ 72 points)
-            table.Columns[1].PreferredWidth = 0.47f * 72;
-            table.Columns[2].PreferredWidth = 0.72f * 72;
-            table.Columns[3].PreferredWidth = 0.56f * 72;
-            table.Columns[4].PreferredWidth = 3.25f * 72;
-            table.Columns[5].PreferredWidth = 1.75f * 72;
+            // Độ rộng từng cột
+            table.Columns[1].Width = 0.81f * 72;  // Khu vực
+            table.Columns[2].Width = 0.69f * 72;  // Rack
+            table.Columns[3].Width = 3.44f * 72;   // Thiết bị và lỗi
+            table.Columns[4].Width = 1.84f * 72;  // Ghi chú
 
             // Header
-            table.Cell(1, 1).Range.Text = "STT";
-            table.Cell(1, 2).Range.Text = "Khu vực";
-            table.Cell(1, 3).Range.Text = "Rack";
-            table.Cell(1, 4).Range.Text = "Thiết bị và lỗi";
-            table.Cell(1, 5).Range.Text = "Ghi chú";
+            table.Cell(1, 1).Range.Text = "Khu vực";
+            table.Cell(1, 2).Range.Text = "Rack";
+            table.Cell(1, 3).Range.Text = "Thiết bị và lỗi";
+            table.Cell(1, 4).Range.Text = "Ghi chú";
             table.Rows[1].Range.Bold = 1;
 
             int row = 2;
-            int stt = 1;
 
             foreach (var group in grouped)
             {
-                var deviceList = group.Select(d => $"- {d.Name}: {string.Join(", ", d.Issue.IssueList)}");
-                var notes = group.Where(d => !string.IsNullOrWhiteSpace(d.Note)).Select(d => d.Note.Trim());
-                table.Cell(row, 1).Range.Text = stt.ToString();
-                table.Cell(row, 2).Range.Text = group.Key.Region;
-                table.Cell(row, 3).Range.Text = group.Key.Rack;
-                table.Cell(row, 4).Range.Text = string.Join("\n", deviceList);
-                table.Cell(row, 5).Range.Text = string.Join("\n", notes);
+                var deviceList = group
+                    .Select(d => $"- {d.Name}: {string.Join(", ", d.Issue?.IssueList ?? new List<string>())}");
+
+                var notes = group
+                    .Where(d => !string.IsNullOrWhiteSpace(d.Note))
+                    .Select(d => d.Note.Trim());
+
+                table.Cell(row, 1).Range.Text = group.Key.Region;
+                table.Cell(row, 2).Range.Text = group.Key.Rack;
+                table.Cell(row, 3).Range.Text = string.Join(Environment.NewLine, deviceList);
+                table.Cell(row, 4).Range.Text = string.Join(Environment.NewLine, notes);
+
+                // Căn trái nội dung text
+                table.Cell(row, 3).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                table.Cell(row, 4).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+
                 row++;
-                stt++;
             }
 
-            for (int i = 2; i <= table.Rows.Count; i++)
+            // Merge Khu vực và Rack
+            int rowStart = 2;
+            while (rowStart <= table.Rows.Count)
             {
-                table.Rows[i].Cells[4].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                table.Rows[i].Cells[5].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                string region = table.Cell(rowStart, 1).Range.Text.TrimEnd('\r', '\a');
+                int rowEnd = rowStart;
+
+                while (rowEnd + 1 <= table.Rows.Count &&
+                       table.Cell(rowEnd + 1, 1).Range.Text.TrimEnd('\r', '\a') == region)
+                {
+                    rowEnd++;
+                }
+
+                // Clear and merge Region
+                for (int r = rowStart + 1; r <= rowEnd; r++)
+                    table.Cell(r, 1).Range.Text = "";
+
+                if (rowEnd > rowStart)
+                {
+                    table.Cell(rowStart, 1).Merge(table.Cell(rowEnd, 1));
+                    Word.Range mergedRegion = table.Cell(rowStart, 1).Range;
+                    mergedRegion.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    mergedRegion.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                }
+
+                // Merge Rack trong Region
+                int rackStart = rowStart;
+                while (rackStart <= rowEnd)
+                {
+                    string rack = table.Cell(rackStart, 2).Range.Text.TrimEnd('\r', '\a');
+                    int rackEnd = rackStart;
+
+                    while (rackEnd + 1 <= rowEnd &&
+                           table.Cell(rackEnd + 1, 2).Range.Text.TrimEnd('\r', '\a') == rack)
+                    {
+                        rackEnd++;
+                    }
+
+                    for (int r = rackStart + 1; r <= rackEnd; r++)
+                        table.Cell(r, 2).Range.Text = "";
+
+                    if (rackEnd > rackStart)
+                    {
+                        table.Cell(rackStart, 2).Merge(table.Cell(rackEnd, 2));
+                        Word.Range mergedRack = table.Cell(rackStart, 2).Range;
+                        mergedRack.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                        mergedRack.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                    }
+
+                    rackStart = rackEnd + 1;
+                }
+
+                rowStart = rowEnd + 1;
             }
         }
+
+
+
 
         private void btnAddGtelChecklist_Click(object sender, EventArgs e)
         {
