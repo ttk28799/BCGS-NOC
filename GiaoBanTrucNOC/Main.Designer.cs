@@ -151,8 +151,6 @@
             // 
             // cboxNextShift
             // 
-            this.cboxNextShift.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboxNextShift.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboxNextShift.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(57)))), ((int)(((byte)(53)))));
             this.cboxNextShift.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cboxNextShift.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -264,8 +262,6 @@
             // 
             // cboxPersonOnDuty
             // 
-            this.cboxPersonOnDuty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboxPersonOnDuty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboxPersonOnDuty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(57)))), ((int)(((byte)(53)))));
             this.cboxPersonOnDuty.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cboxPersonOnDuty.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -390,6 +386,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(191)))), ((int)(((byte)(165)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dgvSoLuotRaVao.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvSoLuotRaVao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSoLuotRaVao.Size = new System.Drawing.Size(314, 127);
             this.dgvSoLuotRaVao.TabIndex = 1;
             // 
