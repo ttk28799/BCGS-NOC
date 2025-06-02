@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiaoBanTrucNOC", "GiaoBanTrucNOC\GiaoBanTrucNOC.csproj", "{A733593C-E0D5-496C-B135-7B75B7518136}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup QLTNOC", "Setup QLTNOC\Setup QLTNOC.vdproj", "{3BEF3FE4-B913-ED89-B297-782A99A80C36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{A733593C-E0D5-496C-B135-7B75B7518136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A733593C-E0D5-496C-B135-7B75B7518136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A733593C-E0D5-496C-B135-7B75B7518136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BEF3FE4-B913-ED89-B297-782A99A80C36}.Debug|Any CPU.ActiveCfg = Debug
+		{3BEF3FE4-B913-ED89-B297-782A99A80C36}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

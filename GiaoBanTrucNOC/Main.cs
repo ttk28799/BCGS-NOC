@@ -22,13 +22,13 @@ namespace GiaoBanTrucNOC
 {
     public partial class Main : Form
     {
-        private static string jsonPath = ".\\DanhSach\\devices.json";
+        private static readonly string jsonPath = ".\\DanhSach\\devices.json";
         // Move the initialization of `deviceList` to the constructor to avoid referencing a non-static method in a field initializer.
         private List<Device> deviceList;
-        private BindingList<Device> dcqgList = new BindingList<Device>();
-        private BindingList<Device> nvnnList = new BindingList<Device>();
-        private BindingList<Device> cccdList = new BindingList<Device>();
-        private BindingList<Device> dddtList = new BindingList<Device>();
+        private readonly BindingList<Device> dcqgList = new BindingList<Device>();
+        private readonly BindingList<Device> nvnnList = new BindingList<Device>();
+        private readonly BindingList<Device> cccdList = new BindingList<Device>();
+        private readonly BindingList<Device> dddtList = new BindingList<Device>();
         public Main()
         {
             InitializeComponent();
@@ -543,7 +543,7 @@ namespace GiaoBanTrucNOC
             {
                 progressDialog.Show();
                 progressDialog.UpdateProgress(0, "Đang chuẩn bị file...");
-                var folder = createDateFolderTree(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FileExport"), DateTime.Now);
+                var folder = CreateDateFolderTree(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FileExport"));
                 var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GiaoBanTrucNOC.docx");
                 var savePath = Path.Combine(folder, $"{dTPicker.Value:dd.MM.yyyy} - Ca {cboxShift.SelectedIndex + 1} - {cboxPersonOnDuty.Text}.docx");
                 var wordApp = new Word.Application();
@@ -683,7 +683,7 @@ namespace GiaoBanTrucNOC
             LoadDataToGrid(checkListPath, "PDU", dgvPDU);
         }
 
-        private string createDateFolderTree(string location, DateTime date)
+        private string CreateDateFolderTree(string location)
         {
             string yearFolder = Path.Combine(location, dTPicker.Value.Year.ToString());
             string monthFolder = Path.Combine(yearFolder, "Tháng " + dTPicker.Value.Month.ToString("00"));
