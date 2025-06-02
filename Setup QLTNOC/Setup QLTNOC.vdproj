@@ -4,9 +4,9 @@
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
 "ProjectName" = "8:QLTNOC"
-"LanguageId" = "3:1033"
+"LanguageId" = "3:0"
 "CodePage" = "3:1252"
-"UILanguageId" = "3:1033"
+"UILanguageId" = "3:0"
 "SccProjectName" = "8:"
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
@@ -107,6 +107,12 @@
         {
         "MsmKey" = "8:_30A847DBA0EC5A0C65D1A0167D072984"
         "OwnerKey" = "8:_1DA0B5A66AD868CA11E8CD1E71BA0B4F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4CB90C63234045B88A3B253D2F5044EA"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -629,6 +635,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4CB90C63234045B88A3B253D2F5044EA"
+            {
+            "SourcePath" = "8:..\\GiaoBanTrucNOC\\change-management.ico"
+            "TargetName" = "8:change-management.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_A40902F59AFF4351B06D69A630D2AC71"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_61584F5692EDC08BD64903370A79EB40"
             {
             "AssemblyRegister" = "3:1"
@@ -886,7 +912,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_1C9CFC74E4AF40E5BC975A5317CC6EC3"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -926,22 +952,22 @@
         }
         "MsiBootstrapper"
         {
-        "LangId" = "3:1033"
+        "LangId" = "3:0"
         "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:QLTNOC"
-        "ProductCode" = "8:{5F8C7CE5-3A88-48DE-AC42-465A0833830B}"
-        "PackageCode" = "8:{41F1EA6E-B469-448C-8DAE-BE8AE26416F5}"
+        "ProductCode" = "8:{D0E0E9A2-34CE-4F54-8CDB-E3611C061FB0}"
+        "PackageCode" = "8:{9DD19932-3650-44B2-AFB7-180DD58332A8}"
         "UpgradeCode" = "8:{E9043F91-B5EA-4C47-A856-76C146D93FB7}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:C06"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1054,20 +1080,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2D93A8B2D05941DE8A9DCE2627C816AE"
-            {
-            "Name" = "8:QLTNOC"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_1C9CFC74E4AF40E5BC975A5317CC6EC3"
-            "Folder" = "8:_1C9CFC74E4AF40E5BC975A5317CC6EC3"
-            "WorkingFolder" = "8:_1C9CFC74E4AF40E5BC975A5317CC6EC3"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {

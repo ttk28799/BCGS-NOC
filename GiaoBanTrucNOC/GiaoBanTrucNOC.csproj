@@ -195,7 +195,6 @@
       <DependentUpon>ThemSuCoKyThuat.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DanhSach\devices.json" />
-    <None Include="GiaoBanTrucNOC_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
