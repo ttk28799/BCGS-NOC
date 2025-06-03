@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Word;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -25,9 +24,10 @@ namespace GiaoBanTrucNOC.SaveLoad
         [DisplayName("Tên thiết bị")]
         public string Name { get; set; } = string.Empty;
 
-        public class DeviceIssue 
+        public class DeviceIssue
         {
             public List<string> IssueList { get; set; } = new List<string>();
+
             public override string ToString()
             {
                 return string.Join(", ", IssueList);
@@ -37,16 +37,14 @@ namespace GiaoBanTrucNOC.SaveLoad
         [DisplayName("Lỗi")]
         public DeviceIssue Issue { get; set; } = new DeviceIssue();
 
-
-
         [DisplayName("Ghi chú")]
         public string Note { get; set; } = string.Empty;
-
 
         public class DeviceLocation
         {
             public string Region { get; set; } = string.Empty;
             public string Rack { get; set; } = string.Empty;
+
             public override string ToString() => $"RACK{Rack}";
         }
 
@@ -56,4 +54,3 @@ namespace GiaoBanTrucNOC.SaveLoad
         }
     }
 }
-

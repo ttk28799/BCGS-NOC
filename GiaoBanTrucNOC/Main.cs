@@ -23,27 +23,19 @@ namespace GiaoBanTrucNOC
     public partial class Main : Form
     {
         private static readonly string jsonPath = ".\\DanhSach\\devices.json";
+
         // Move the initialization of `deviceList` to the constructor to avoid referencing a non-static method in a field initializer.
         private List<Device> deviceList;
+
         private readonly BindingList<Device> dcqgList = new BindingList<Device>();
         private readonly BindingList<Device> nvnnList = new BindingList<Device>();
         private readonly BindingList<Device> cccdList = new BindingList<Device>();
         private readonly BindingList<Device> dddtList = new BindingList<Device>();
+
         public Main()
         {
             InitializeComponent();
             deviceList = LoadDeviceList(jsonPath); // Initialize here
-        }
-
-        private void RoundControl(Control c, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(c.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(c.Width - radius, c.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, c.Height - radius, radius, radius, 90, 90);
-            path.CloseAllFigures();
-            c.Region = new Region(path);
         }
 
         private void dTPicker_ValueChanged(object sender, EventArgs e)
@@ -519,9 +511,6 @@ namespace GiaoBanTrucNOC
             }
         }
 
-
-
-
         private void btnAddGtelChecklist_Click(object sender, EventArgs e)
         {
             //Nếu nUDCountGTEL.Value <= 0 thì không thêm vào dgvSoLuotRaVao
@@ -555,7 +544,7 @@ namespace GiaoBanTrucNOC
                 }
                 var doc = wordApp.Documents.Open(filePath);
                 try
-                { 
+                {
                     progressDialog.UpdateProgress(10, "Đang xuất dữ liệu ca trực...");
                     var data = new Dictionary<string, string>
                     {
@@ -649,11 +638,10 @@ namespace GiaoBanTrucNOC
 
         private void Main_Load(object sender, EventArgs e)
         {
-
             //Nếu chưa có file devices.json thì tạo mới file, thêm 01 device có các trường trống vào file
             if (!File.Exists(jsonPath))
             {
-                var device = new Device(Guid.NewGuid(), new Device.DeviceLocation { Region = "DCQG", Rack = "01" }, "Thiết bị 01", new Device.DeviceIssue() , string.Empty);
+                var device = new Device(Guid.NewGuid(), new Device.DeviceLocation { Region = "DCQG", Rack = "01" }, "Thiết bị 01", new Device.DeviceIssue(), string.Empty);
                 deviceList.Add(device);
                 var json = JsonSerializer.Serialize(deviceList, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(jsonPath, json);
@@ -731,12 +719,15 @@ namespace GiaoBanTrucNOC
                     case "DCQG":
                         dcqgList.Add(device);
                         break;
+
                     case "NVNN":
                         nvnnList.Add(device);
                         break;
+
                     case "CCCD":
                         cccdList.Add(device);
                         break;
+
                     case "DDDT":
                         dddtList.Add(device);
                         break;
@@ -893,6 +884,18 @@ namespace GiaoBanTrucNOC
         }
 
         private void btnClose_Click(object sender, EventArgs e)
+        {
+            // Xác nhận đóng ứng dụng
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn đóng ứng dụng?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmResult == DialogResult.Yes)
+            {
+                // Lưu danh sách thiết bị vào file json trước khi đóng
+                ExportDeviceIssueListToJson();
+                Application.Exit(); // Hoặc Close() nếu bạn muốn đóng form hiện tại
+            }
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
         {
             // Xác nhận đóng ứng dụng
             var confirmResult = MessageBox.Show("Bạn có chắc muốn đóng ứng dụng?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
