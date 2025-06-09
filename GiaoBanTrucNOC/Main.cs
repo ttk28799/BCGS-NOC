@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -40,37 +38,76 @@ namespace GiaoBanTrucNOC
 
         private void dTPicker_ValueChanged(object sender, EventArgs e)
         {
-            TimeChanged();
-        }
-
-        private void TimeChanged()
-        {
-            //Khi người dùng thay đổi thời gian thì thay đổi thời gian của label TimeFrom và TimeTo
-            if (cboxShift.SelectedIndex == 0)
+            cboxShift.SelectedIndex = -1; // Reset shift selection
+            cboxShift.Items.Clear(); // Clear previous items
+            if (dTPicker.Value.DayOfWeek == DayOfWeek.Saturday || dTPicker.Value.DayOfWeek == DayOfWeek.Sunday)
             {
-                lblTimeFrom.Text = "7h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-                lblTimeTo.Text = "10h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                cboxShift.Items.Add("7h30 - 12h30");
+                cboxShift.Items.Add("12h30 - 17h30");
+                cboxShift.Items.Add("17h30 - 7h30");
             }
-            if (cboxShift.SelectedIndex == 1)
+            else
             {
-                lblTimeFrom.Text = "10h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-                lblTimeTo.Text = "14h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-            }
-            if (cboxShift.SelectedIndex == 2)
-            {
-                lblTimeFrom.Text = "14h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-                lblTimeTo.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-            }
-            if (cboxShift.SelectedIndex == 3)
-            {
-                lblTimeFrom.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
-                lblTimeTo.Text = "7h30 ngày " + dTPicker.Value.AddDays(1).ToString("dd/MM/yyyy");
+                cboxShift.Items.Add("7h30 - 10h30");
+                cboxShift.Items.Add("10h30 - 14h30");
+                cboxShift.Items.Add("14h30 - 17h30");
+                cboxShift.Items.Add("17h30 - 7h30");
             }
         }
 
         private void cboxShift_SelectedIndexChanged(object sender, EventArgs e)
         {
             TimeChanged();
+        }
+
+        private void TimeChanged()
+        {
+            //Nếu ngày được chọn là thứ 7 hoặc Chủ nhật thì sửa lại combobox
+            if (dTPicker.Value.DayOfWeek == DayOfWeek.Saturday || dTPicker.Value.DayOfWeek == DayOfWeek.Sunday)
+            {   
+                switch (cboxShift.SelectedIndex)
+                {
+                    case 0:
+                        lblTimeFrom.Text = "7h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "12h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        break;
+
+                    case 1:
+                        lblTimeFrom.Text = "12h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        break;
+
+                    case 2:
+                        lblTimeFrom.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "7h30 ngày " + dTPicker.Value.AddDays(1).ToString("dd/MM/yyyy");
+                        break;
+                }
+            }
+            else
+            {
+                switch (cboxShift.SelectedIndex)
+                {
+                    case 0:
+                        lblTimeFrom.Text = "7h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "10h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        break;
+
+                    case 1:
+                        lblTimeFrom.Text = "10h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "14h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        break;
+
+                    case 2:
+                        lblTimeFrom.Text = "14h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        break;
+
+                    case 3:
+                        lblTimeFrom.Text = "17h30 ngày " + dTPicker.Value.ToString("dd/MM/yyyy");
+                        lblTimeTo.Text = "7h30 ngày " + dTPicker.Value.AddDays(1).ToString("dd/MM/yyyy");
+                        break;
+                }
+            }
         }
 
         private void btnAddRaVao_Click(object sender, EventArgs e)
